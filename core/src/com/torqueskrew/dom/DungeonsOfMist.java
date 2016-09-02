@@ -3,12 +3,17 @@ package com.torqueskrew.dom;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
+import assets.AssetLoader;
+import screens.LoadingScreen;
+
 public class DungeonsOfMist extends Game {
-	
+	private Game game;
+
 	@Override
 	public void create () {
 		Gdx.app.log("MistBAGame", "created");
-        //setScreen(new GameScreen());
+        game = this;
+        setScreen(new LoadingScreen(game));
 	}
 
 	@Override
@@ -19,6 +24,7 @@ public class DungeonsOfMist extends Game {
     @Override
     public void dispose() {
         super.dispose();
+        AssetLoader.dispose();
     }
 
     @Override
