@@ -27,6 +27,11 @@ public class AssetLoader {
     public static Vector2 playerRecC;
     //----maps
     public static TiledMap worldMap;
+    //----enemies
+    public static Sprite dragonSprite;
+    //----items
+    public static Sprite goldPileSprite;
+
 
     public static void create() {
         assetManager = new AssetManager();
@@ -49,7 +54,9 @@ public class AssetLoader {
     public static int loadGameWorld() {
         worldMap = new TmxMapLoader().load("maps/levels/Newmap.tmx");
         //assetManager.load("Dragon.png", Sprite.class);
-        loadCharacterAssets(4);
+        loadCharacterAssets(4); //TODO this will eventually be move out into the main menu
+        loadItems();
+        loadEnemies();
 
         return 1;
     }
@@ -79,6 +86,22 @@ public class AssetLoader {
         collisionLayer = map.getLayers().get("collisionLayer");
         collisionObjects = collisionLayer.getObjects();
         return collisionObjects;
+    }
+
+    private static void loadItems() {
+        Texture goldPileTextureSheet;
+
+        //gold coin load
+        goldPileTextureSheet = new Texture(Gdx.files.internal("gold.png"));
+        goldPileSprite = new Sprite(goldPileTextureSheet,0,64,32,32);
+    }
+
+    private static void loadEnemies() {
+        Texture dragonTexture;
+
+        //dragon load
+        dragonTexture = new Texture(Gdx.files.internal("dragon.PNG"));
+        dragonSprite = new Sprite(dragonTexture);
     }
 
     //----private functions
