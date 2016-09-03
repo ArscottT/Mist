@@ -3,6 +3,7 @@ package screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -22,6 +23,7 @@ public class LoadingScreen implements Screen {
         AssetLoader.create();
         batch = new SpriteBatch();
         font = new BitmapFont();
+        //showMainMenu();
     }
 
     @Override
@@ -31,13 +33,11 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         font.draw(batch, "Loading...", 100, 100);
         batch.end();
-        if (AssetLoader.assetManager.update()) {
-            AssetLoader.done();
-            game.setScreen(new MainMenuScreen(game));
-        }
     }
 
     @Override
@@ -63,5 +63,13 @@ public class LoadingScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    private void showMainMenu() {
+        AssetLoader.loadMainMenu();
+        //if (AssetLoader.assetManager.update()) {
+            AssetLoader.done();
+            game.setScreen(new MainMenuScreen(game));
+        //}
     }
 }

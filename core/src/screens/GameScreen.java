@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
+import assets.AssetLoader;
+
 /**
  * Created by Tom on 20/06/2016.
  */
@@ -15,6 +17,8 @@ public class GameScreen implements Screen {
     public GameScreen(Game game, Screen parent) {
         this.game = game;
         this.parent = parent;
+        //this function may have to be moved to a loadGameScreen screen
+        AssetLoader.loadGameWorld();
     }
 
     @Override

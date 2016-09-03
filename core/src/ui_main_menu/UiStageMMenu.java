@@ -27,7 +27,7 @@ public class UiStageMMenu extends Stage {
         startGameButton.setTouchable(Touchable.enabled);
         startGameButton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button){
-                MainMenuScreen.startGame();
+                //MainMenuScreen.startGame();
                 return true;
             }});
 
