@@ -18,12 +18,10 @@ public class LoadingScreen implements Screen {
     private Game game;
 
     public LoadingScreen(Game game) {
-        Gdx.app.log("LoadingScreen", "Attached");
         this.game = game;
         AssetLoader.create();
         batch = new SpriteBatch();
         font = new BitmapFont();
-        //showMainMenu();
     }
 
     @Override
@@ -38,6 +36,7 @@ public class LoadingScreen implements Screen {
         batch.begin();
         font.draw(batch, "Loading...", 100, 100);
         batch.end();
+        showMainMenu();
     }
 
     @Override
@@ -66,10 +65,9 @@ public class LoadingScreen implements Screen {
     }
 
     private void showMainMenu() {
-        AssetLoader.loadMainMenu();
-        //if (AssetLoader.assetManager.update()) {
-            AssetLoader.done();
+        if (AssetLoader.loadMainMenu() == 1) {
+            //AssetLoader.done();
             game.setScreen(new MainMenuScreen(game));
-        //}
+        }
     }
 }
