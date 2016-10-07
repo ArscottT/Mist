@@ -153,7 +153,7 @@ public class AssetLoader {
         playerLookDown = new Sprite(tmp[offsetRow][1 + offsetColumn]);
         playerLookLeft = new Sprite(tmp[1 + offsetRow][1 + offsetColumn]);
         //----calc character rect
-        playerRecC = new Vector2();
+        playerRecC = new Vector2(); // I no longer think I need this
         playerRect = new Rectangle(0, 0, characterTexture.getWidth()/FRAME_COLS, characterTexture.getHeight()/FRAME_ROWS);
         playerRecC = playerRect.getCenter(playerRecC);
     }
