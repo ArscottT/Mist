@@ -38,8 +38,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        world.update();
         renderer.render();
-        world.upDate();
     }
 
     @Override

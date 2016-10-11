@@ -27,6 +27,7 @@ public class GameRenderer {
     private TiledMapTileLayer groundLayer;
     //----other----
     private SpriteBatch batch;
+    private float elapsedTime = 0;
 
     public GameRenderer(GameWorld world) {
         this.world = world;
@@ -40,9 +41,13 @@ public class GameRenderer {
         //----map renderer----
         tiledMapRenderer = new OrthogonalTiledMapRenderer(world.getMap());
         tiledMapRenderer.setView(camera);
+
+        //----sprites----
+        batch = new SpriteBatch();
     }
 
     public void render() {
+        elapsedTime += Gdx.graphics.getDeltaTime();
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //Gdx.app.log("GameRenderer", "render");
@@ -50,11 +55,24 @@ public class GameRenderer {
         //----tiled map----
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-        /*
+
         //----sprite batch----
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        */
+
+            if (world.getPlayer().getMoving() == 'n') {
+                batch.draw(world.getPlayer().getSprite(),
+                        world.getPlayer().getPosition().x - world.getPlayer().getPlayerRectC().x,
+                        world.getPlayer().getPosition().y - world.getPlayer().getPlayerRectC().y);
+            }
+            else {
+                batch.draw(world.getPlayer().getAnimation().getKeyFrame(elapsedTime, true),
+                        world.getPlayer().getPosition().x - world.getPlayer().getPlayerRectC().x,
+                        world.getPlayer().getPosition().y - world.getPlayer().getPlayerRectC().y);
+            }
+
+        batch.end();
+
         //----camera----
         //updateCamera();
     }

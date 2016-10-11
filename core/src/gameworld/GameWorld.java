@@ -3,6 +3,7 @@ package gameworld;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import assets.AssetLoader;
+import player.Human;
 import player.Player;
 
 /**
@@ -10,17 +11,22 @@ import player.Player;
  */
 public class GameWorld {
     private TiledMap map;
-    //Player player;
+    private Player player;
 
     public GameWorld() {
         map = AssetLoader.worldMap;
+        player = new Human(this);
     }
 
-    public void upDate() {
+    public void update() {
 
     }
 
     public TiledMap getMap() {
         return map;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

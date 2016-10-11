@@ -1,5 +1,10 @@
 package player;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
 import helpers.Dmg;
 
 /**
@@ -12,4 +17,10 @@ public interface Player {
     void skillAttack();
     void skillSelf();
     void skillOther();
+    Vector2 getPosition();
+    char getMoving();
+    Rectangle getPlayerRect();
+    Vector2 getPlayerRectC();
+    Animation getAnimation();
+    Sprite getSprite ();
 }
