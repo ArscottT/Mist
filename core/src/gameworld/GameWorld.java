@@ -16,6 +16,7 @@ public class GameWorld {
     public GameWorld() {
         map = AssetLoader.worldMap;
         player = new Human(this);
+        player.jumpToPosition(AssetLoader.returnMapLocation("treeStartPoint", map));
     }
 
     public void update() {

@@ -12,6 +12,7 @@ import helpers.Dmg;
  */
 public interface Player {
     void movement(char d);
+    void jumpToPosition(Vector2 vec);
     Dmg attack();
     void defend(Dmg dmg);
     void skillAttack();

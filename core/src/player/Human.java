@@ -55,6 +55,12 @@ public class Human implements Player {
     }
 
     @Override
+    public void jumpToPosition(Vector2 vec) {
+        position.x = vec.x;
+        position.y = vec.y;
+    }
+
+    @Override
     public Dmg attack() {
         return attackCalc.attack(weapon, baseDmg, baseAttackRating);
     }
@@ -97,6 +103,7 @@ public class Human implements Player {
         return playerRect.getCenter(new Vector2()); //TODO does this cause memory usage? New one every time?
     }
 
+    @Override
     public Animation getAnimation() { //TODO should this link to a player variable not AssetLoader
         if (moving == 'u') {
             movingPrev = 'u';
@@ -117,6 +124,7 @@ public class Human implements Player {
         return AssetLoader.playerWalkUpAnimation;
     }
 
+    @Override
     public Sprite getSprite () {
         if (movingPrev == 'u') {
             return AssetLoader.playerLookUp;

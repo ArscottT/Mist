@@ -25,6 +25,8 @@ public class GameRenderer {
     //----tiled map----
     private TiledMapRenderer tiledMapRenderer;
     private TiledMapTileLayer groundLayer;
+    //----camera control----
+    int tileSize = 0, mapWidth = 0, mapHeight = 0;
     //----other----
     private SpriteBatch batch;
     private float elapsedTime = 0;
@@ -41,6 +43,12 @@ public class GameRenderer {
         //----map renderer----
         tiledMapRenderer = new OrthogonalTiledMapRenderer(world.getMap());
         tiledMapRenderer.setView(camera);
+
+        //----camera control----
+        groundLayer = (TiledMapTileLayer) world.getMap().getLayers().get("Ground Layer");
+        tileSize = (int) groundLayer.getTileWidth();
+        mapWidth = groundLayer.getWidth() * tileSize;
+        mapHeight = groundLayer.getHeight() * tileSize;
 
         //----sprites----
         batch = new SpriteBatch();
@@ -74,9 +82,9 @@ public class GameRenderer {
         batch.end();
 
         //----camera----
-        //updateCamera();
+        updateCamera();
     }
-    /*
+
     private void updateCamera() {
         camera.position.x = world.getPlayer().getPosition().x;
         camera.position.y = world.getPlayer().getPosition().y;
@@ -114,5 +122,5 @@ public class GameRenderer {
             camera.position.y = mapHeight - cameraHalfHeight;
         }
         camera.update();
-    }*/
+    }
 }
