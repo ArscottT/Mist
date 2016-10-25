@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+import assets.AssetLoader;
+
 /**
  * Created by Tom on 20/06/2016.
  */
@@ -45,10 +47,9 @@ public class GameRenderer {
         tiledMapRenderer.setView(camera);
 
         //----camera control----
-        groundLayer = (TiledMapTileLayer) world.getMap().getLayers().get("Ground Layer");
-        tileSize = (int) groundLayer.getTileWidth();
-        mapWidth = groundLayer.getWidth() * tileSize;
-        mapHeight = groundLayer.getHeight() * tileSize;
+        this.tileSize = AssetLoader.tileSize;
+        this.mapWidth = AssetLoader.mapWidth;
+        this.mapHeight = AssetLoader.mapHeight;
 
         //----sprites----
         batch = new SpriteBatch();

@@ -8,9 +8,11 @@ import com.badlogic.gdx.math.Vector2;
 import assets.AssetLoader;
 import gameworld.GameWorld;
 import helpers.Dmg;
+import items.Backpack;
 import items.Weapon;
 import player_components.AttackCalc;
 import player_components.DefendCalc;
+import player_components.ItemsCalc;
 import player_components.MovementCalc;
 
 /**
@@ -26,7 +28,9 @@ public class Human implements Player {
     private AttackCalc attackCalc;
     private DefendCalc defendCalc;
     private MovementCalc movementCalc;
+    private ItemsCalc itemsCalc;
     //----items----
+    private Backpack backpack;
     private Weapon weapon;
     //----stats----
     private int baseDmg = 10, baseAttackRating = 10; //random number at the moment
@@ -40,7 +44,9 @@ public class Human implements Player {
         attackCalc = new AttackCalc();
         defendCalc = new DefendCalc();
         movementCalc = new MovementCalc(world);
+        itemsCalc = new ItemsCalc(world, this);
         //----items----
+        backpack = new Backpack();
         weapon = new Weapon();
     }
 
@@ -83,6 +89,11 @@ public class Human implements Player {
     @Override
     public void skillOther() {
 
+    }
+
+    @Override
+    public void pickUp() {
+        itemsCalc.searchForItems();
     }
 
     @Override
@@ -140,4 +151,7 @@ public class Human implements Player {
         }
         return AssetLoader.playerLookUp;
     }
+
+    @Override
+    public Backpack getBackpack() { return backpack; }
 }

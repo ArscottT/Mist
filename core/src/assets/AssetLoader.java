@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -27,6 +28,7 @@ public class AssetLoader {
     public static Vector2 playerRecC;
     //----maps
     public static TiledMap worldMap;
+    public static int tileSize = 0, mapWidth = 0, mapHeight = 0;
     //----enemies
     public static Sprite dragonSprite;
     //----items
@@ -52,7 +54,7 @@ public class AssetLoader {
     }
 
     public static int loadGameWorld() {
-        worldMap = new TmxMapLoader().load("maps/levels/Newmap.tmx");
+        loadMapVars();
         //assetManager.load("Dragon.png", Sprite.class);
         loadCharacterAssets(4); //TODO this will eventually be move out into the main menu
         loadItems();
@@ -86,6 +88,16 @@ public class AssetLoader {
         collisionLayer = map.getLayers().get("collisionLayer");
         collisionObjects = collisionLayer.getObjects();
         return collisionObjects;
+    }
+
+    private static void loadMapVars() {
+        TiledMapTileLayer groundLayer;
+
+        worldMap = new TmxMapLoader().load("maps/levels/Newmap.tmx");
+        groundLayer = (TiledMapTileLayer) worldMap.getLayers().get("Ground Layer");
+        tileSize = (int) groundLayer.getTileWidth();
+        mapWidth = groundLayer.getWidth() * tileSize;
+        mapHeight = groundLayer.getHeight() * tileSize;
     }
 
     private static void loadItems() {

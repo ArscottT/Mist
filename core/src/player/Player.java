@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import helpers.Dmg;
+import items.Backpack;
 
 /**
  * Created by Tom on 20/06/2016.
@@ -18,10 +19,12 @@ public interface Player {
     void skillAttack();
     void skillSelf();
     void skillOther();
+    void pickUp();
     Vector2 getPosition();
     char getMoving();
     Rectangle getPlayerRect();
     Vector2 getPlayerRectC();
     Animation getAnimation();
     Sprite getSprite ();
+    Backpack getBackpack();
 }
