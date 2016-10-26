@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import java.util.ArrayList;
 
 import assets.AssetLoader;
+import enemies.Enemy;
 import items.Item;
 
 /**
@@ -32,6 +33,8 @@ public class GameRenderer {
     private TiledMapTileLayer groundLayer;
     //----items----
     private ArrayList<Item> itemList;
+    //----enemies----
+    private ArrayList<Enemy> enemyList;
     //----camera control----
     int tileSize = 0, mapWidth = 0, mapHeight = 0;
     //----other----
@@ -53,6 +56,7 @@ public class GameRenderer {
 
         //----items----
         this.itemList = world.getItemHandler().getList();
+        this.enemyList = world.getEnemyHandler().getList();
 
         //----camera control----
         this.tileSize = AssetLoader.tileSize;
@@ -80,6 +84,11 @@ public class GameRenderer {
             for (Item item : itemList) {
                 batch.draw(item.getSprite(), item.getWorldPosition().x - (item.getSprite().getWidth()/2),
                     item.getWorldPosition().y - (item.getSprite().getHeight()/2));
+            }
+
+            for  (Enemy enemy : enemyList) {
+                    batch.draw(enemy.getSprite(), enemy.getWorldPosition().x - (enemy.getSprite().getWidth()/2),
+                    enemy.getWorldPosition().y - (enemy.getSprite().getHeight()/2));
             }
 
             if (world.getPlayer().getMoving() == 'n') {
