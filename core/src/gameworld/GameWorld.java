@@ -1,8 +1,10 @@
 package gameworld;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Vector2;
 
 import assets.AssetLoader;
+import items.GoldPile;
 import items.ItemHandler;
 import player.Human;
 import player.Player;
@@ -23,6 +25,8 @@ public class GameWorld {
         itemHandler = new ItemHandler();
         player = new Human(this);
         player.jumpToPosition(AssetLoader.returnMapLocation("treeStartPoint", map));
+
+        itemHandler.dropDefined(new GoldPile(), new Vector2(100,100));
     }
 
     public void update() {

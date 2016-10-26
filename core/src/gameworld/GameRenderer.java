@@ -8,7 +8,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+import java.util.ArrayList;
+
 import assets.AssetLoader;
+import items.Item;
 
 /**
  * Created by Tom on 20/06/2016.
@@ -27,6 +30,8 @@ public class GameRenderer {
     //----tiled map----
     private TiledMapRenderer tiledMapRenderer;
     private TiledMapTileLayer groundLayer;
+    //----items----
+    private ArrayList<Item> itemList;
     //----camera control----
     int tileSize = 0, mapWidth = 0, mapHeight = 0;
     //----other----
@@ -45,6 +50,9 @@ public class GameRenderer {
         //----map renderer----
         tiledMapRenderer = new OrthogonalTiledMapRenderer(world.getMap());
         tiledMapRenderer.setView(camera);
+
+        //----items----
+        this.itemList = world.getItemHandler().getList();
 
         //----camera control----
         this.tileSize = AssetLoader.tileSize;
@@ -69,15 +77,20 @@ public class GameRenderer {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
+            for (Item item : itemList) {
+                batch.draw(item.getSprite(), item.getWorldPosition().x - (item.getSprite().getWidth()/2),
+                    item.getWorldPosition().y - (item.getSprite().getHeight()/2));
+            }
+
             if (world.getPlayer().getMoving() == 'n') {
                 batch.draw(world.getPlayer().getSprite(),
-                        world.getPlayer().getPosition().x - world.getPlayer().getPlayerRectC().x,
-                        world.getPlayer().getPosition().y - world.getPlayer().getPlayerRectC().y);
+                    world.getPlayer().getPosition().x - world.getPlayer().getPlayerRectC().x,
+                    world.getPlayer().getPosition().y - world.getPlayer().getPlayerRectC().y);
             }
             else {
                 batch.draw(world.getPlayer().getAnimation().getKeyFrame(elapsedTime, true),
-                        world.getPlayer().getPosition().x - world.getPlayer().getPlayerRectC().x,
-                        world.getPlayer().getPosition().y - world.getPlayer().getPlayerRectC().y);
+                    world.getPlayer().getPosition().x - world.getPlayer().getPlayerRectC().x,
+                    world.getPlayer().getPosition().y - world.getPlayer().getPlayerRectC().y);
             }
 
         batch.end();

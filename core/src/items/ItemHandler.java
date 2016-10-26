@@ -1,5 +1,7 @@
 package items;
 
+import com.badlogic.gdx.math.Vector2;
+
 import java.util.ArrayList;
 
 /**
@@ -10,14 +12,15 @@ public class ItemHandler {
 
     public ItemHandler() { itemList = new ArrayList<Item>();}
 
-    public void dropDefined (Item item){ //TODO should this take in a world position
+    public void dropDefined (Item item, Vector2 vec){
+        item.setWorldPosition(vec);
         itemList.add(item);
         //item.setIndex(itemList.indexOf(item));
     }
 
-    public void removeDefined(int i) {
+    /*public void removeDefined(int i) {
         itemList.remove(i);
-    }
+    }*/
 
     public void removeDefined(Item item) {
         itemList.remove(item);
